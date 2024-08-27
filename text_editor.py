@@ -28,22 +28,26 @@ while True :
     choice = prompt([actionchoice])
     print(choice['choice'])
 
-    if choice['choice'] =='add some text' :
-        add = input("add something to your list  :")
-        to_do_list.append(add)
-        with open(file_path, "a") as file: file.write(add)
-    elif choice['choice'] == 'read the file' :
-        with open(file_path) as file: print(file.read())
-    elif choice['choice'] == 'destroy the file' :
-        while len(confirmation) == 0 :
-            confirmation = input("this will "+term.on_red("permenantly delete the file and it's content")+ ", are you sure to continuer : Y/N :").upper()
-        if confirmation == "Y":
-            os.remove(file_path)   #very scary  
-        elif confirmation == "N":
-            pass
-    elif choice['choice'] == 'close the program' :
-            sys.exit(0)
-    elif choice['choice'] == 'encrypt the file':
-         encryption.file_encryption(file_path)
-    elif choice['choice'] == 'decrypt the file':
-         encryption.file_decryption(file_path)
+    try:
+
+        if choice['choice'] =='add some text' :
+            add = input("add something to your list  :")
+            to_do_list.append(add)
+            with open(file_path, "a") as file: file.write(add)
+        elif choice['choice'] == 'read the file' :
+            with open(file_path) as file: print(file.read())
+        elif choice['choice'] == 'destroy the file' :
+            while len(confirmation) == 0 :
+                confirmation = input("this will "+term.on_red("permenantly delete the file and it's content")+ ", are you sure to continuer : Y/N :").upper()
+            if confirmation == "Y":
+                os.remove(file_path)   #very scary  
+            elif confirmation == "N":
+                pass
+        elif choice['choice'] == 'close the program' :
+                sys.exit(0)
+        elif choice['choice'] == 'encrypt the file':
+            encryption.file_encryption(file_path)
+        elif choice['choice'] == 'decrypt the file':
+            encryption.file_decryption(file_path)
+    except FileNotFoundError:
+        print('There is no file here')
