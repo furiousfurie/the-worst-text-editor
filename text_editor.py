@@ -7,8 +7,12 @@ import re
 term = blessed.Terminal()
 to_do_list = []
 ogfile_path = input('where do you want your file to be :')
-if re.match(r'^([\'"]).+\1', ogfile_path): file_path = ogfile_path[1:-1]
-else: file_path = ogfile_path
+isfile = False
+while not isfile:
+    if re.match(r'^([\'"]).+\1', ogfile_path): file_path = ogfile_path[1:-1]
+    else: file_path = ogfile_path
+    isfile = os.path.isfile(file_path)
+    if not isfile: print('Not a file')
 
           
 
